@@ -1,7 +1,9 @@
+using Fluid;
 using Microsoft.CodeAnalysis.Text;
 using Scriban;
 using Scriban.Runtime;
 using System.Text;
+using TemplateContext = Scriban.TemplateContext;
 
 namespace Mediator.SourceGenerator;
 
@@ -46,10 +48,14 @@ internal sealed partial class MediatorImplementationGenerator
     {
         try
         {
-            var file = "resources/MediatorFallback.sbn-cs";
-            var template = Template.Parse(EmbeddedResource.GetContent(file), file);
-            var output = template.Render(compilationAnalyzer, member => member.Name);
+            var file = "resources/MediatorFallback.liquid";
 
+            var templateContent = EmbeddedResource.GetContent(file);
+            var parser = new FluidParser();
+            var template = parser.Parse(templateContent);
+
+            var context = new Fluid.TemplateContext(compilationAnalyzer);
+            var output = template.Render(context);
             compilationAnalyzer.Context.AddSource("Mediator.g.cs", SourceText.From(output, Encoding.UTF8));
         }
         catch (Exception ex)

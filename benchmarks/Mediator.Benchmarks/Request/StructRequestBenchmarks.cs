@@ -55,7 +55,7 @@ public class StructRequestBenchmarks
     private IServiceProvider _serviceProvider;
     private IServiceScope _serviceScope;
     private IMediator _mediator;
-    private Mediator _concreteMediator;
+    private MediatR.Mediator _concreteMediator;
     private MediatR.IMediator _mediatr;
     private IAsyncRequestHandler<SomeStructRequest, SomeResponse> _messagePipeHandler;
     private SomeStructHandler _handler;

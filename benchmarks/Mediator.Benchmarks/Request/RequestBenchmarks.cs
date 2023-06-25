@@ -39,7 +39,7 @@ public class RequestBenchmarks
     private IServiceProvider _serviceProvider;
     private IServiceScope _serviceScope;
     private IMediator _mediator;
-    private Mediator _concreteMediator;
+    private MediatR.Mediator _concreteMediator;
     private MediatR.IMediator _mediatr;
     private IAsyncRequestHandler<SomeRequest, SomeResponse> _messagePipeHandler;
     private SomeHandlerClass _handler;
